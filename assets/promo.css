@@ -52,3 +52,6 @@
 .pr-fine{margin:10px 0 0;font-size:.78rem;color:var(--soft)}
 #est{scroll-margin-top:96px}
 @media print{.pr-calc{display:none}}
+/* intro offer box in the hero: a fixed monthly price for small businesses that don't think in views */
+.pr-intro{display:flex;flex-direction:column;gap:4px;max-width:640px;margin:14px 0;padding:12px 16px;border-radius:12px;border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.pr-intro b{font-size:1.05rem}.pr-intro span{color:var(--soft);font-size:.92rem}

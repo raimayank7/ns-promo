@@ -9,7 +9,7 @@
   'use strict';
   var NS = window.NS;
   var R = { cpm: 50, place: { all: { label: 'Everywhere', mult: 1 }, pages: { label: 'Guide and tool pages', mult: 1 }, app: { label: 'Nivesh Sahayak App', mult: 1.3 } },
-    india_extra: 0.2, india_share: 0.9, views_per_day: { pages: 12000, app: 3000 }, ctr: [0.004, 0.012],
+    india_extra: 0, india_share: 0.9, views_per_day: { pages: 12000, app: 3000 }, ctr: [0.004, 0.012],
     budget: { min: 100, max: 5000, step: 50, start: 200 }, days: { min: 1, max: 90, start: 15 }, min_total: 500 };
   var box, f, last = '', touched = false;
   function $(s, p) { return (p || document).querySelector(s); }
@@ -86,7 +86,7 @@
     $$('[name="days"],[name="days_r"]', f).forEach(function (i) { i.min = R.days.min; i.max = R.days.max; if (!touched) i.value = R.days.start; });
     $$('[data-pr-cpm]').forEach(function (e) { e.textContent = inr(R.cpm); });
     $$('[data-place-label]', f).forEach(function (l) { var p = R.place[l.getAttribute('data-place-label')]; if (p) l.textContent = p.label; });
-    var ex = $('[data-pr-india]', f); if (ex) ex.textContent = '+' + Math.round(R.india_extra * 100) + '%';
+    var ex = $('[data-pr-india]', f); if (ex) { ex.textContent = R.india_extra ? '+' + Math.round(R.india_extra * 100) + '%' : ''; ex.hidden = !R.india_extra; }
     draw();
   }
 
