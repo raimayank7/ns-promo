@@ -1,0 +1,340 @@
+/* Nivesh Sahayak document sites: shared look. Fonts = the Nivesh Sahayak set (Plus Jakarta Sans, Public Sans, IBM Plex Mono). */
+/* anything the code marks hidden stays hidden, whatever display a class gives it (visitor walk: cheque fields showed for UPI) */
+[hidden]{display:none!important}
+:root{
+  --navy:#0B3B5B;--amber:#F5A524;
+  --bg:#F6F8FB;--surface:#FFFFFF;--surface2:#EEF3F8;--ink:#0F1B2A;--soft:#4A5B6E;--line:#D9E2EC;
+  --accent:#0B3B5B;--accent-ink:#FFFFFF;--link:#0B5F8F;--ok:#0F7A43;--bad:#B42318;--focus:#F5A524;--field:#FFFFFF;--field-line:#C5D2DF;
+  --script:system-ui;
+  --font:'Public Sans',var(--script),system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --font-head:'Plus Jakarta Sans',var(--font);--mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+  --r:12px;--shadow:0 1px 2px rgba(15,27,42,.06),0 6px 20px rgba(15,27,42,.06);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --bg:#0B1420;--surface:#111D2B;--surface2:#16263A;--ink:#E6EDF5;--soft:#9FB1C4;--line:#24384F;
+  --accent:#F5A524;--accent-ink:#1B1300;--link:#7CC4F0;--ok:#4ADE80;--bad:#FCA5A5;--shadow:0 1px 2px rgba(0,0,0,.3);--field:#0B1420;--field-line:#335070;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#0B1420;--surface:#111D2B;--surface2:#16263A;--ink:#E6EDF5;--soft:#9FB1C4;--line:#24384F;
+  --accent:#F5A524;--accent-ink:#1B1300;--link:#7CC4F0;--ok:#4ADE80;--bad:#FCA5A5;--shadow:0 1px 2px rgba(0,0,0,.3);--field:#0B1420;--field-line:#335070;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--font)}
+img{max-width:100%}
+a{color:var(--link)}
+h1,h2,h3,h4{font-family:var(--font-head);line-height:1.25;letter-spacing:-.01em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 16px}
+.soft{color:var(--soft)}
+.skip{position:absolute;inset-inline-start:8px;top:-80px;background:var(--surface);padding:8px 12px;border-radius:8px;z-index:99}
+.skip:focus{top:8px}
+
+/* header */
+.hd{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.hd .wrap{display:flex;align-items:center;gap:12px;min-height:60px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);min-width:0}
+.brand .mk{height:58px;width:auto;flex:none}
+@media (max-width:520px){.brand .mk{height:42px}}
+.brand .mk-d{display:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .brand .mk-l{display:none}:root:not([data-theme=light]) .brand .mk-d{display:block}}
+:root[data-theme=dark] .brand .mk-l{display:none}:root[data-theme=dark] .brand .mk-d{display:block}
+.brand b{font-family:var(--font-head);font-weight:800;font-size:1.05rem;line-height:1.1;display:block}
+.brand small{display:block;color:var(--soft);font-size:.78rem;line-height:1.2}
+.hd nav{margin-left:auto;display:flex;align-items:center;gap:4px}
+.hd nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:.92rem;padding:8px 10px;border-radius:8px}
+.hd nav a:hover{background:var(--surface2)}
+.icon-btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;width:40px;height:40px;display:grid;place-items:center;cursor:pointer;flex:none}
+.icon-btn svg{width:20px;height:20px}
+@media (max-width:1180px){.hd nav a.hide-md{display:none}}
+@media (max-width:720px){.hd nav a.hide-sm{display:none}.brand small{display:none}}
+@media (max-width:380px){.brand b{font-size:.9rem}.brand .mk{height:28px}.hd .wrap{gap:8px}}
+.lang-pick{width:auto;max-width:150px;min-height:40px;padding:6px 28px 6px 10px;font-size:.88rem;border-radius:10px}
+@media (max-width:400px){.lang-pick{max-width:120px!important;padding-right:22px}}   /* the header has its own second row on phones now: room for the whole language name */
+/* smallest phones: brand name must not run under the language picker */
+@media (max-width:360px){.lang-pick{max-width:100px!important;padding-left:6px}.hd nav{gap:3px}.hd nav .btn.sm{padding-left:7px;padding-right:7px;font-size:.8rem}.hd .icon-btn{width:36px}}
+@media (max-width:520px){.lang-pick{max-width:104px}.brand small{display:none}.brand b{font-size:.92rem}.brand b .soft{display:block;font-size:.78rem;font-weight:700}.hd nav{gap:4px}}
+.guide-en{background:var(--surface2);border-radius:10px;padding:8px 14px;margin-top:12px;font-size:.92rem;color:var(--soft)}
+/* right-to-left languages (Urdu, Kashmiri, Sindhi): the layout mirrors; codes, numbers and the printed sheet stay left-to-right */
+[dir=rtl] .hd nav{margin-left:0;margin-right:auto}
+[dir=rtl] .callout{border-left:0;border-right:4px solid var(--amber)}
+[dir=rtl] input[dir=ltr]{text-align:right}
+/* pages still in English stay left-to-right inside a right-to-left screen */
+html[data-page-lang=en][dir=rtl] .hero,html[data-page-lang=en][dir=rtl] .prose{direction:ltr;text-align:left}
+:lang(ur) body,:lang(ks) body{line-height:2}
+
+/* buttons and fields */
+.btn{font:600 .95rem var(--font);display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:8px 16px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;text-decoration:none}
+.btn:hover{border-color:var(--soft)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.sm{min-height:36px;padding:4px 10px;font-size:.85rem;white-space:nowrap}
+.btn.danger{color:var(--bad)}
+.link{background:none;border:0;color:var(--link);font:inherit;font-size:.85rem;cursor:pointer;padding:4px 0;text-decoration:underline}
+input,select,textarea{font:16px var(--font);color:var(--ink);background:var(--field);border:1px solid var(--field-line);border-radius:9px;padding:9px 11px;width:100%;min-height:44px}
+textarea{resize:vertical;min-height:64px}
+input[type=file]{padding:7px;font-size:.9rem}
+input[type=checkbox]{width:20px;height:20px;min-height:0;accent-color:var(--accent)}
+input[type=radio]{width:20px;height:20px;min-height:0;padding:0;margin:0;flex:none;accent-color:var(--accent)}
+.f.choice{flex-direction:row;flex-wrap:wrap;column-gap:24px}
+input:focus,select:focus,textarea:focus{border-color:var(--accent);outline:2px solid color-mix(in srgb,var(--accent) 35%,transparent);outline-offset:0}
+[aria-invalid=true]{border-color:var(--bad)}
+
+/* page content */
+main{display:block}
+.hero{padding-top:26px;padding-bottom:8px}
+.hero h1{font-size:clamp(1.55rem,3.6vw,2.3rem);margin:0 0 6px}
+.hero p{margin:0;color:var(--soft);max-width:70ch}
+.prose{max-width:780px;margin:0 auto;padding:10px 16px 40px}
+.prose h1{font-size:clamp(1.6rem,3.6vw,2.2rem);margin:.6em 0 .3em}
+.prose h2{font-size:1.35rem;margin:1.6em 0 .4em}
+.prose h3{font-size:1.1rem;margin:1.3em 0 .3em}
+.prose p,.prose li{max-width:72ch}
+.prose table{border-collapse:collapse;width:100%;margin:12px 0;font-size:.95rem;display:block;overflow-x:auto}
+.prose th,.prose td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+.prose th{background:var(--surface2)}
+.prose .lead{font-size:1.08rem;color:var(--soft)}
+.callout{background:var(--surface2);border-left:4px solid var(--amber);border-radius:10px;padding:12px 16px;margin:16px 0}
+.cta-box{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:24px 0;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.crumbs{font-size:.85rem;color:var(--soft);padding-top:14px}
+.crumbs a{color:var(--soft)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:12px;margin:16px 0}
+.cards a{display:block;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;text-decoration:none;color:var(--ink)}
+.cards a b{display:block;font-family:var(--font-head);margin-bottom:2px}
+.cards a span{color:var(--soft);font-size:.92rem}
+.cards a:hover{border-color:var(--accent)}
+details.faq{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0}
+details.faq summary{font-weight:700;cursor:pointer;font-family:var(--font-head)}
+
+/* footer */
+.ft{border-top:1px solid var(--line);background:var(--surface);margin-top:40px;padding:26px 0 30px;font-size:.92rem;color:var(--soft)}
+.ft .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:18px}
+.ft h4{color:var(--ink);margin:0 0 6px;font-size:.95rem}
+.ft ul{list-style:none;margin:0;padding:0}
+.ft li{margin:4px 0}
+.ft a{color:var(--soft)}
+.ft .free-line{margin:20px 0 0;padding:10px 14px;border-radius:10px;background:var(--surface2);color:var(--ink);display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center}
+.ft .free-line a{color:var(--accent);font-weight:700}
+.ft .base{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between}
+
+/* sponsor card (one, small) */
+.sponsor-slot{max-width:780px;margin:20px auto;padding:0 16px}
+.sponsor{display:flex;gap:12px;align-items:center;background:var(--surface);border:1px dashed var(--line);border-radius:var(--r);padding:10px 12px;text-decoration:none;color:var(--ink)}
+.sponsor img{width:72px;height:72px;object-fit:cover;border-radius:8px;flex:none}
+.sponsor small{display:block;color:var(--soft);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}
+.sponsor b{display:block}
+.sponsor span span{display:block;color:var(--soft);font-size:.9rem}
+.sponsor em{font-style:normal;color:var(--link);font-weight:600;font-size:.9rem}
+/* the line under the card for businesses that want a card of their own; the App's card fades to the next one every 30 s */
+.sp-promo{margin:6px 2px 0;font-size:.82rem;text-align:end}.sp-promo a{color:var(--soft)}.sp-promo a:hover{color:var(--link)}
+.sponsor-slot{transition:opacity .25s}.sponsor-slot.sp-out{opacity:0}
+@media print{.sponsor-slot{display:none!important}}
+
+/* dialogs, toast, reminder */
+dialog{border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);padding:0;width:min(640px,calc(100vw - 24px));max-height:calc(100vh - 40px)}
+dialog::backdrop{background:rgba(5,12,20,.55)}
+.dlg-h{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface)}
+.dlg-h h2{margin:0;font-size:1.15rem}
+.dlg-b{padding:14px 16px 18px}
+.dlg-b .btns{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.dlg-b .note{font-size:.92rem;color:var(--soft)}
+.dlg-b h3{font-size:1rem;margin:18px 0 4px}
+.counts{list-style:none;padding:0;margin:0 0 10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.counts li{background:var(--surface2);border-radius:10px;padding:8px 10px;font-size:.9rem}
+.counts b{display:block;font-size:1.3rem;font-family:var(--font-head)}
+/* My data window: settings-style panel (side list of parts, count strip, status lines, rows with small buttons) */
+dialog.md-dlg{width:min(820px,calc(100vw - 24px))}
+.md-dlg .dlg-h{padding:10px 14px}
+.md-dlg .dlg-b{padding:0}
+.md-wrap{display:grid;grid-template-columns:190px minmax(0,1fr);min-height:min(340px,70vh)}
+.md-nav{display:flex;flex-direction:column;gap:2px;padding:10px 8px;background:var(--surface2);border-inline-end:1px solid var(--line)}
+.md-nav button{font:600 .9rem var(--font);text-align:start;min-height:40px;padding:6px 12px;border:0;border-radius:8px;background:none;color:var(--ink);cursor:pointer;border-inline-start:3px solid transparent}
+.md-nav button:hover{background:var(--surface)}
+.md-nav button[aria-selected=true]{background:var(--surface);border-inline-start-color:var(--accent);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.md-nav button:focus-visible{outline:3px solid var(--focus);outline-offset:-3px}
+.md-panes{min-width:0;padding:12px 16px 16px}
+.md-counts{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:10px;table-layout:fixed;margin:0 0 12px}
+.md-counts td{padding:8px 12px;vertical-align:top;border-inline-start:1px solid var(--line)}
+.md-counts td:first-child{border-inline-start:0}
+.md-counts b{display:block;font:700 1.25rem/1.2 var(--font-head);font-variant-numeric:tabular-nums}
+.md-counts span{display:block;margin-top:2px;font-size:.8rem;color:var(--soft);line-height:1.3}
+.md-stat{margin:0;font-size:.9rem}
+.md-stat>div{display:grid;grid-template-columns:minmax(120px,170px) minmax(0,1fr);gap:4px 12px;padding:7px 0;border-bottom:1px solid var(--line);align-items:center}
+.md-stat dt{color:var(--soft);font-size:.85rem}
+.md-stat dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.md-stat .hp-q,.md-row .hp-q{width:24px;height:24px;font-size:.78rem;margin-inline-start:6px}
+.md-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--soft);margin-inline-end:7px;vertical-align:.1em}
+.md-dot.on{background:var(--ok)}.md-dot.warn{background:var(--amber)}
+.md-panes .hp-tip{margin:6px 0 4px;font-size:.86rem}
+.md-bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.md-dlg .btn.sm{min-height:40px;padding:6px 12px}
+.md-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.md-row:first-child{padding-top:4px}
+.md-rl{flex:1 1 240px;min-width:0}
+.md-rl>b{font-size:.95rem}
+.md-st{display:block;margin-top:3px;font-size:.85rem;color:var(--soft);overflow-wrap:anywhere}
+.md-rb{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+.md-panes .gd-card{margin-top:12px}
+@media (max-width:620px){
+  .md-wrap{grid-template-columns:minmax(0,1fr);min-height:0}
+  .md-nav{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);padding:6px;border-inline-end:0;border-bottom:1px solid var(--line)}
+  .md-nav button{text-align:center;line-height:1.25;border-inline-start:0;border-bottom:3px solid transparent;border-radius:8px 8px 0 0}
+  .md-nav button[aria-selected=true]{border-bottom-color:var(--accent)}
+  .md-panes{padding:10px 12px 14px}
+  .md-counts tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .md-counts td:nth-child(3){border-inline-start:0}
+  .md-counts td:nth-child(n+3){border-top:1px solid var(--line)}
+  .md-stat>div{grid-template-columns:minmax(0,2fr) minmax(0,3fr)}
+  .md-rb{justify-content:flex-start}
+}
+@media (max-width:300px){.md-nav{grid-template-columns:minmax(0,1fr)}.md-stat>div{grid-template-columns:minmax(0,1fr)}.md-counts tr{grid-template-columns:minmax(0,1fr)}.md-counts td{border-inline-start:0!important}.md-counts td+td{border-top:1px solid var(--line)}.md-nav button{font-size:.82rem;padding:4px 8px}}
+#ns-toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;max-width:calc(100vw - 32px);z-index:60;transition:.25s;font-size:.95rem}
+#ns-toast.show{opacity:1;transform:translate(-50%,0)}
+#ns-toast.bad{background:var(--bad);color:#fff}
+.remind{background:#FEF3C7;color:#5B3B00;border-bottom:1px solid #F5D78A}
+.remind .wrap{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding-top:8px;padding-bottom:8px;font-size:.92rem}
+.remind .btn{min-height:36px;padding:4px 12px;font-size:.85rem;background:#fff;color:#5B3B00;border-color:#E5C66A}
+
+/* loading: shimmer from the first paint, then fade in */
+.shim{background:linear-gradient(90deg,var(--surface2) 25%,var(--surface) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shim 1.2s infinite linear;border-radius:10px}
+@keyframes shim{to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.shim{animation:none}#ns-toast{transition:none}}
+
+/* GSTIN details from the GST portal (gstfetch.js) */
+.gf-dlg .gf-hd{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface);z-index:1}
+.gf-dlg .gf-hd h2{margin:0;font-size:1.15rem}
+.gf-dlg .gf-bd{padding:14px 16px}
+.gf-dlg .gf-ft{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px;border-top:1px solid var(--line);position:sticky;bottom:0;background:var(--surface)}
+.gf-g{font-family:var(--mono);font-size:1.15rem;font-weight:700;letter-spacing:.04em;margin:0 0 6px}
+.gf-facts{margin:0 0 12px;padding-left:1.2em}.gf-facts li{margin:2px 0}
+.gf-steps{padding-left:1.3em;margin:0 0 12px}.gf-steps li{margin:0 0 8px}.gf-steps .btn{margin-top:6px}
+.gf-lbl{display:block;font-weight:600;margin:4px 0}
+.gf-dlg .fg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px;margin:8px 0 12px}
+.gf-dlg .f{display:flex;flex-direction:column;gap:4px;min-width:0}.gf-dlg .f label{font-size:.85rem;font-weight:600;color:var(--soft)}
+.gf-dlg .wide,.gf-dlg .f:first-child,.gf-dlg .f:has(#gf-addr){grid-column:1/-1}
+.gf-alt{margin:-4px 0 0;grid-column:1/-1}
+.gf-btn{display:inline-block;margin-top:4px;font-weight:600}
+@media (max-width:520px){.gf-dlg .fg{grid-template-columns:1fr}}
+
+/* shown inside the Nivesh Sahayak App (html.embed, set at first paint when the page is in a frame): only the tool */
+html.embed .hd,html.embed .ft,html.embed .remind,html.embed .skip,html.embed [data-guide-en],html.embed .sponsor-slot{display:none!important}
+html.embed #main>*:not(#tool):not(#my-app):not(dialog):not(script){display:none!important}
+html.embed #main>#tool,html.embed #main>#my-app{margin-top:12px}
+
+/* motion: soft transitions everywhere (core.js NS.motion fades in panels, tabs and lists as they change); all off with "reduce motion" */
+@media (prefers-reduced-motion:no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.22s}
+  .btn,.icon-btn,.link,.hd nav a,.cards a,.lang-pick,details.faq,input,select,textarea{transition:background-color .18s,border-color .18s,color .18s,box-shadow .18s,transform .12s,outline-color .18s}
+  .btn:active,.icon-btn:active{transform:scale(.96)}
+  .btn.primary:hover{box-shadow:0 4px 14px color-mix(in srgb,var(--accent) 30%,transparent)}
+  .cards a:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(10,30,50,.10)}
+  html.ready #main>*{animation:ns-up .38s cubic-bezier(.2,.7,.3,1) backwards}
+  html.ready #main>:nth-child(2){animation-delay:.04s}html.ready #main>:nth-child(3){animation-delay:.08s}
+  html.ready #main>:nth-child(4){animation-delay:.12s}html.ready #main>:nth-child(n+5){animation-delay:.16s}
+  dialog[open]{animation:ns-pop .22s cubic-bezier(.2,.8,.3,1.1)}
+  dialog[open]::backdrop{animation:ns-fade .22s ease-out}
+  details.faq[open]>:not(summary){animation:ns-up .25s ease-out}
+  .sponsor-slot:not([hidden]){animation:ns-fade .4s ease-out}
+}
+@keyframes ns-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes ns-pop{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes ns-fade{from{opacity:0}to{opacity:1}}
+@media print{html.ready #main>*{animation:none!important}}
+
+/* alignment pass on every site (owner, 2026-11-05) */
+/* header controls one height, on one line */
+.hd nav>a,.hd nav>.btn,.hd nav>button,.hd nav>select{min-height:40px;box-sizing:border-box}
+.hd nav>a,.hd nav>.btn,.hd nav>button{display:inline-flex;align-items:center;justify-content:center}
+/* money and numbers never break in the middle on screen (printed documents keep their own layout) */
+@media screen{
+  :is(td.n,th.n,.amt):not(#sheet *,.sh *){white-space:nowrap;font-variant-numeric:tabular-nums}
+}
+/* on phones a table that is wider than the screen scrolls by itself instead of pushing the page sideways */
+@media screen and (max-width:620px){
+  #main table:not(#sheet *,.sh *,:is(.tbl-wrap,.gt-scroll,.tbl,.sb-sheet-wrap,.prose) table){display:block;overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch}
+}
+/* device test fixes (5 Nov 2026, tested 240 px feature phones to 4K): */
+/* header: the site name keeps its room; when the buttons don't fit next to it they move to a second row instead of covering it */
+.hd .wrap{flex-wrap:wrap;row-gap:6px;padding-top:4px;padding-bottom:4px}
+.brand{flex:1 1 auto;min-width:min(158px,100%)}
+.brand>span{min-width:0}
+.brand b{overflow-wrap:anywhere}
+.hd nav{flex:0 1 auto;flex-wrap:wrap;justify-content:flex-end;min-width:0;row-gap:6px}
+/* guide pages: long numbers, links and words wrap; code samples scroll inside their own box */
+.prose{overflow-wrap:break-word}
+.prose :is(p,li,td,th,summary,figcaption){overflow-wrap:anywhere}
+.prose pre{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+/* Batch 1 (extras.js): PIN lock screen, edit history, sample-data strip, charges and repeat on bills */
+html.pin-wait #my-app,html.pin-wait #app,html.pin-wait .hero{visibility:hidden}
+#ns-lock{position:fixed;inset:0;z-index:300;background:var(--bg);display:grid;place-items:center;padding:16px;overflow:auto}
+#ns-lock .lk{width:min(380px,100%);background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 18px;display:flex;flex-direction:column;gap:10px;text-align:center}
+#ns-lock h2{margin:0;font-size:1.3rem}
+#ns-lock input{font:700 1.6rem var(--mono,monospace);letter-spacing:.4em;text-align:center}
+#ns-lock [hidden]{display:none!important}
+#ns-lock .lk-msg{min-height:1.2em;margin:0;color:var(--bad);font-weight:600}
+#ns-lock .lk-forgot{text-align:start;border-top:1px solid var(--line);padding-top:10px;display:flex;flex-direction:column;gap:8px;font-size:.92rem}
+.b1-log{list-style:none;padding:0;margin:10px 0 0;display:flex;flex-direction:column;gap:8px}
+.b1-log>li{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--surface)}
+.b1-lh{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
+.b1-lh .soft{font-size:.84rem;margin-inline-start:auto}
+.b1-ch{margin:6px 0 0;padding-inline-start:18px;font-size:.86rem;overflow-wrap:anywhere}
+.b1-ch span{color:var(--soft)}
+.b1-ch s{color:var(--bad);text-decoration-thickness:1px}
+.b1-sample{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;background:#FFF7E0;color:#5A3B00;border:1px solid #F5C451;border-radius:10px;padding:8px 12px;margin:10px 0}
+:root[data-theme=dark] .b1-sample{background:#2B2208;color:#FCE7B0;border-color:#7A5A10}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .b1-sample{background:#2B2208;color:#FCE7B0;border-color:#7A5A10}}
+.b1-pill{display:inline-block;font-size:.72rem;font-weight:700;padding:1px 7px;border-radius:99px;background:#F5C451;color:#3A2600;vertical-align:middle}
+.b1-warn{color:var(--bad);font-weight:600}
+.chg{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) auto;gap:8px;align-items:end;margin:6px 0}
+.chg .f{margin:0}
+@media (max-width:520px){.chg{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.chg .f:first-child{grid-column:1/-1}}
+.b1-wiz .fg{margin-top:8px}
+.b1-rep{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(230px,100%),1fr));gap:10px;margin:12px 0}
+.b1-rep .card{margin:0;display:flex;flex-direction:column;gap:6px}
+.b1-rep .card p{margin:0;font-size:.9rem}
+.b1-rep .card .btn{align-self:flex-start;margin-top:auto}
+.b1-due li{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.seg.cats{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.seg.cats [aria-pressed=true]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+/* Batch 2 (hubmore.js): rows of salesmen and custom fields in My data > Settings */
+.b2-row{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1.4fr) 44px;gap:8px;align-items:end;margin:0 0 10px;padding:10px;border:1px solid var(--line);border-radius:10px}
+.b2-row label{display:flex;flex-direction:column;gap:3px;font-size:.85rem;font-weight:600;min-width:0}
+.b2-row label.chk{flex-direction:row;align-items:center;min-height:44px}
+.b2-row.cf{grid-template-columns:minmax(0,2fr) minmax(0,1fr) 44px}
+.b2-types{grid-column:1/-1;border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:4px 14px}
+.b2-types legend{font-size:.85rem;font-weight:600;padding:0;margin-bottom:4px}
+.b2-types label.chk{min-height:36px;font-weight:500}
+@media (max-width:520px){.b2-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 44px}.b2-row>label:first-child{grid-column:1/-1}}
+
+/* Report it notice + contact form (contact.js) */
+.tell{border-top:1px solid var(--line);background:var(--surface2)}
+.tell .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 14px;padding-top:10px;padding-bottom:10px;font-size:.92rem;color:var(--soft);text-align:center}
+.tell .btn{min-height:36px}
+html.embed .tell{display:none}
+.ct-form{display:grid;gap:12px;max-width:640px}
+.ct-f{display:grid;gap:4px}.ct-f label{font-weight:600;font-size:.92rem}
+.ct-form textarea{min-height:120px;resize:vertical}
+.ct-2{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr))}
+.ct-hp{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}   /* robot trap; no left:-9999px, which scrolls RTL pages sideways */
+.ct-priv{font-size:.85rem;color:var(--soft);margin:0}
+.ct-out{margin:0;font-weight:600}.ct-out:empty{display:none}.ct-out.ok{color:var(--ok)}.ct-out.bad{color:var(--bad)}
+.ct-btns{display:flex;gap:8px}
+@media print{.tell{display:none}}
+
+/* line icons on text buttons (core.js NS.btnIcons) */
+.btn>svg.bi{width:1.1em;height:1.1em;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btn.sm>svg.bi{width:1em;height:1em}
+:is(.link,.linkish,[data-tab-btn])>svg.bi{width:1.05em;height:1.05em;flex:none;vertical-align:-.17em;margin-inline-end:5px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.md-nav button{display:flex;align-items:center;gap:2px}
+@media (max-width:620px){.md-nav button{justify-content:center}}
+/* number series: My data › Settings cards and the maker's "Change number series" */
+.dc-sub{font-size:.95rem;margin:16px 0 8px;color:var(--soft);text-transform:uppercase;letter-spacing:.04em}
+.dc-top{margin:0 0 4px}
+.dcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(230px,100%),1fr));gap:10px}
+.dcard{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--surface);display:grid;gap:8px;align-content:start}
+.dc-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.dc-h b{font-family:var(--font-head)}
+.dc-open{font-size:.85rem;white-space:nowrap}
+.dc-row{display:grid;gap:4px}.dc-row label{font-size:.85rem;color:var(--soft)}
+.dc-next{font-size:.82rem;color:var(--soft)}
+.series-link{display:block;margin-top:4px;text-align:start;font-size:.82rem}
+/* touch screens: the small "?" tips and text-style buttons get a finger-sized tap area (visitor walk, 5 Nov 2026) */
+@media (pointer:coarse){.hp-q{min-width:32px;min-height:32px}button.link{min-height:36px}}
