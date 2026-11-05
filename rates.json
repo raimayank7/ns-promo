@@ -1,5 +1,5 @@
 {
-  "_note": "Promotion card prices for the estimate calculator on promo.niveshsahayak.in (engine/promo.js). Change the numbers, rebuild promo, publish. cpm = rupees per 1,000 card views. views_per_day = how many card views each place can give in a day (update from Cloudflare Web Analytics now and then). If you change cpm, place mult, india_extra or min_total, also change the same numbers in the questions on sites/promo/pages/index.html.",
+  "_note": "Promotion card prices for the estimate calculator on promo.niveshsahayak.in (engine/promo.js). Change the numbers, rebuild promo, publish. cpm = rupees per 1,000 card views. views_per_day = how many card views each place can give in a day (update from Cloudflare Web Analytics now and then). If you change cpm, place mult, india_extra or min_total, also change the same numbers in the questions on sites/promo/pages/index.html. discounts = money off the whole promotion for longer runs: the biggest one whose days the run reaches.",
   "cpm": 50,
   "place": {
     "all": {
@@ -39,5 +39,15 @@
     "max": 90,
     "start": 7
   },
-  "min_total": 500
+  "min_total": 500,
+  "discounts": [
+    {
+      "days": 30,
+      "off": 0.1
+    },
+    {
+      "days": 90,
+      "off": 0.2
+    }
+  ]
 }

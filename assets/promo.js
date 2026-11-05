@@ -28,15 +28,19 @@
     var rate = R.cpm * R.place[place].mult * (india ? 1 + R.india_extra : 1);
     var avail = (place === 'all' ? R.views_per_day.pages + R.views_per_day.app : R.views_per_day[place] || 0) * (india ? R.india_share : 1);
     var want = daily / rate * 1000, views = Math.min(want, avail), capped = want > avail;
-    var payDay = views * rate / 1000, total = payDay * days;
-    return { daily: daily, days: days, place: place, india: india, rate: rate, avail: avail, views: views, capped: capped, payDay: payDay, total: total,
+    var payDay = views * rate / 1000, full = payDay * days;
+    /* longer runs cost less: the biggest discount whose days this run reaches (rates.json discounts) */
+    var off = (R.discounts || []).reduce(function (o, d) { return days >= d.days && d.off > o ? d.off : o; }, 0), total = full * (1 - off);
+    return { daily: daily, days: days, place: place, india: india, rate: rate, avail: avail, views: views, capped: capped, payDay: payDay, total: total, full: full, off: off,
       maxDaily: Math.ceil(avail * rate / 1000) };
   }
 
   function draw() {
     var c = calc(), lo = c.views * 0.85, hi = c.views;
     $('[data-pr-total]', box).textContent = inr(c.total);
-    $('[data-pr-sum]', box).textContent = inr(c.payDay) + ' a day × ' + c.days + (c.days === 1 ? ' day' : ' days');
+    $('[data-pr-sum]', box).textContent = inr(c.payDay) + ' a day × ' + c.days + (c.days === 1 ? ' day' : ' days') +
+      (c.off ? ' = ' + inr(c.full) + ', less ' + Math.round(c.off * 100) + '% for a longer run' : '');
+    var sv = $('[data-pr-save]', box); if (sv) { sv.hidden = !c.off; sv.textContent = c.off ? 'You save ' + inr(c.full - c.total) : ''; }
     $('[data-pr-rate]', box).textContent = inr(c.rate) + ' per 1,000 views';
     $('[data-pr-vday]', box).textContent = num(about(lo)) + ' – ' + num(about(hi));
     $('[data-pr-vall]', box).textContent = num(about(lo * c.days)) + ' – ' + num(about(hi * c.days));
@@ -55,7 +59,7 @@
     $$('[data-days]', box).forEach(function (b) { b.setAttribute('aria-pressed', +b.getAttribute('data-days') === c.days ? 'true' : 'false'); });
     last = ['Promotion card estimate (promo.niveshsahayak.in)',
       'Where: ' + R.place[c.place].label, 'Who sees it: ' + (c.india ? 'Only visitors in India' : 'All visitors'),
-      'Daily budget: ' + inr(c.payDay), 'Days: ' + c.days, 'Total: ' + inr(c.total) + ' (' + inr(c.rate) + ' per 1,000 views)',
+      'Daily budget: ' + inr(c.payDay), 'Days: ' + c.days, 'Total: ' + inr(c.total) + ' (' + inr(c.rate) + ' per 1,000 views' + (c.off ? ', ' + Math.round(c.off * 100) + '% off for ' + c.days + ' days' : '') + ')',
       'Estimated views: ' + $('[data-pr-vall]', box).textContent, '', 'My business:', 'Card link:', 'Start date:'].join('\n');
   }
 
