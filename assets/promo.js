@@ -80,7 +80,7 @@
       ta.focus({ preventScroll: true });
       return;
     }
-    var go = function () { NS.toast('Estimate copied. Paste it into the contact form.'); window.open('https://www.niveshsahayak.in/p/contact.html', '_blank', 'noopener'); };
+    var go = function () { NS.toast('Estimate copied. Paste it into the contact form.'); location.href = '/contact/'; };
     if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(last).then(go, go); else go();
   }
 
