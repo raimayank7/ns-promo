@@ -8,7 +8,7 @@
 (function () {
   'use strict';
   var NS = window.NS;
-  var R = { cpm: 50, place: { all: { label: 'Everywhere', mult: 1 }, pages: { label: 'Guide and tool pages', mult: 1 }, app: { label: 'Nivesh Sahayak App', mult: 1.3 } },
+  var R = { cpm: 50, place: { all: { label: 'Everywhere', mult: 1 }, pages: { label: 'Guide and tool pages', mult: 1 }, app: { label: 'NSBiz', mult: 1.3 } },
     india_extra: 0, india_share: 0.9, views_per_day: { pages: 12000, app: 3000 }, ctr: [0.004, 0.012],
     budget: { min: 100, max: 5000, step: 50, start: 200 }, days: { min: 1, max: 90, start: 15 }, min_total: 500 };
   var box, f, last = '', touched = false;
